@@ -1,0 +1,85 @@
+{% if tipo_usuario == "Admin" %}
+    {% extends "Layout.htm" %}
+    {% block conteudo %}
+<div class="row">
+    <div class="col-4">
+        <h2>Agendamento</h2>
+    </div>
+    <div class="form-group col-3">
+        <input class="form-control"  id="date" type="date">
+    </div>
+    <div class="form-group col-3">
+        
+        <select class="form-control" name="barbeiros" id="barbeiros">
+        {% for usuarios in nome_usuario %}
+            <option value={{usuarios[0]}}>{{usuarios[1]}}</option>
+        {% endfor %}
+        </select>
+    </div>
+    <div class="col-2">
+        <a href="{{url_for('Scheduling')}}"><button class="btn btn-dark">Agendar cliente ?</button></a>
+    </div>
+
+</div>
+<div>
+    <table class="table">
+        <thead class="thead-dark" style="text-align: center;">
+        <tr>
+            <th scope="col">Nome do Cliente</th>
+            <th scope="col">Nome do Barbeiro</th>
+            <th scope="col">Data Agendamento</th>
+            <th scope="col">Excluir</th>
+        </tr>
+        </thead>
+        <form method="POST">
+            <tbody style="text-align: center;" id="tbody">
+            </tbody> 
+        </form>
+    </table>
+</div>
+<script src="{{url_for('static', filename='js/historic.js')}}"></script>
+<script src="{{url_for('static', filename='js/FilterScheduling.js')}}"></script>
+{% endblock conteudo %}
+{% else %}
+    {% extends "Layout_Barbeiro.htm" %}
+    {% block conteudo_barbeiro %}
+    <div class="row">
+        <div class="col-4">
+            <h2>Filtrar Agendamentos</h2>
+        </div>
+        <div class="form-group col-3">
+            <input class="form-control"  id="date" type="date">
+        </div>
+        <div class="form-group col-3">
+            
+            <select class="form-control" name="barbeiros" id="barbeiros">
+            {% for usuarios in nome_usuario %}
+                <option value={{usuarios[0]}}>{{usuarios[1]}}</option>
+            {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <a href="{{url_for('Scheduling')}}"><button class="btn btn-dark">Agendar cliente ?</button></a>
+        </div>
+    </div>
+    <div>
+        <table class="table">
+            <thead class="thead-dark" style="text-align: center;">
+            <tr>
+                <th scope="col">Nome do Cliente</th>
+                <th scope="col">Nome do Barbeiro</th>
+                <th scope="col">Data Agendamento</th>
+                <th scope="col">Excluir</th>
+            </tr>
+            </thead>
+            <form method="POST">
+                <tbody style="text-align: center;" id="tbody">
+                </tbody> 
+            </form>
+        </table>
+    </div>
+    <script src="{{url_for('static', filename='js/historic.js')}}"></script>
+    <script src="{{url_for('static', filename='js/FilterScheduling.js')}}"></script>
+    {% endblock %}
+    
+{% endif %}
